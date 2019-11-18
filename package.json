@@ -1,0 +1,24 @@
+{
+  "name": "fullstackml",
+  "version": "1.0.0",
+  "description": "full stack service for machine learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robbie632/fullstackML.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robbie632/fullstackML/issues"
+  },
+  "homepage": "https://github.com/Robbie632/fullstackML#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "handlebars": "^4.5.1",
+    "request": "^2.88.0"
+  }
+}
