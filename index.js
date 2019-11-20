@@ -1,92 +1,97 @@
 const express = require('express')
-const handlebars = require('handlebars')
+const hbs = require('hbs')
 const request = require('request')
+const path = require('path')
+/*here I'm using destructuring, in the braces on the left is the name of the
+object method that I want, the resulting object will be the same as the name of
+the method in the ./utils object*/
 
-
-/* API request for weather data*/
-
-const url = ' https://api.darksky.net/forecast/0161faf99c034b36802f950a0ea69173/37.8267,-122.4233'
-
-request({ url: url, json: true }, (error, response) => {
-    /*the request function is a callback function that executes an arrowhead
-    function that takes teh arguments error, response and body. The response
-    contains both the metadata and the actual data, the body contains the actual
-    data, the response has a body key*/
-
-    if (error) {
-        return(console.log(error))
-    }
-
-    console.log(response.body)//response.body same as body
-
-})
-
-/* API request for forward geocoding aka taking address and getting back coordinates*
-
-/*optional paramaters are appended onto the end of the request url and
-is preceeded by a '&' sign, for example I look up the documentation and see
-there is an optional paramter called limit so I include this at the end
-of the url*/
-
-const url_geocoding = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoicm9iYmllNjMyIiwiYSI6ImNrMzQ2NzZsdTBmbTkzaXBqdnp6eXhqYnIifQ.qkPQwmyVmJr7WUHrxcqROQ&limit=1"
-
-request({ url: url_geocoding, json: true }, (error, response) => {
-
-    //this error condition catches any connection errors
-    if (error) {
-        return(console.log('unable to connect to mapbox API'))
-
-    /*this error condition works on the basis that any mistakes in the API
-    key will return error data*/
-    } else if (response.body.error) {
-        console.log('There is a mistake in the request URL')
-
-    //If there are no errors then the data is logged
-    } else {
-        console.log(response.body)//response.body same as body
-    }
-})
-
-//calling instance of express object
 const app = express()
 const port = 3000
 
+//below line of code defines which templating library is being used
+app.set('view engine', 'hbs')
+//below line defines which folder contains client side JavaScript files
+app.use(express.static('js'))
 
-/*  app.get() creates a web url
-this is a get request, this is where data is got in the body
-req stands for request and res stands for response */
+
+/*train and predict api endpoints*/
+app.get('/train', (req, res) => {
+
+    if (!req.query.train) {
+        return('train node api error')
+    } else {
+        res.send({
+            message: 'response from train api'
+        })
+    }
+
+})
+
+app.get('/predict', (req, res) => {
+    if (!req.query.predictRequest) {
+        return('predict node api error')
+    } else {
+        res.send({
+            message: 'response from predict api'
+        })
+    }
+})
+
+
+// all code below is for practise
+const { callDarkSky } = require('./utils')
+
+callDarkSky('37.8267', '-122.4233', (error, response) => {
+    console.log(response)
+})
+
+const url = ' https://api.darksky.net/forecast/0161faf99c034b36802f950a0ea69173/37.8267,-122.4233'
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
-})
 
-const homepageTemplate = handlebars.compile("<h1> this is a rendered html string {{ name }}, {{ secondName }} </h1>")
-const contactUsTemplate = handlebars.compile("<h1> contact us at this address {{ address }} on this day {{ day }} </h1>")
+    request({ url: url, json: true }, (error, response) => {
 
+        if (error) {
+            return(console.log('error connecting to API'))
+        } else if (response.body.error) {
+            console.log('mistake in API token')
+        }
 
-/*the colon in the url signifies that you want to receive the URL paramater name
-the (req, res) arrowhead function is a callback.
-It's expected that the input to the function are
- objects with associated methods etc such as re.params*/
-app.get('/homepage/:name', (req, res) => {
+        console.log(response.body.currently)
 
-    res.send(homepageTemplate({
-        /*the keys represent the names in the html template and
-        the values what is to be substituted when the html is rendered
-        here you extract the url paramater from the req object*/
-        name : req.params.name,
-        secondName : 'Robbie'
-    }))
-})
-
-/*the question mark means that an error is
-not returned if the user goes to /contact_us/*/
-app.get('/contact_us/:my_param?', (req, res) => {
-    res.send(contactUsTemplate({
-        address:req.params.my_param,
-        day : 'Monday'
-    }))
+    })
 })
 
 
-/* the app is listening on port 3000, so go to localhost:3000 to connect*/
+
+
+app.get('/testStringQuery', (req, res) => {
+
+    /*req stands for requests
+    req.search object is the string query passed into the browser currently
+    fo passing the string query search put the below url into your browser
+    localhost:3000/testStringQuery?search=<param_of_your_choice>*/
+    if (!req.query.search) {
+
+        return(console.log('no search'))
+    }
+    //I could do stuff with the data here, then send back something else
+
+    //res.send(req.query.search)
+    res.send({
+        hello:req.query.search,
+        my:'friend'
+    })
+})
+
+const myVar = 'Ive injected a variable for templating'
+
+app.get('/plotlytest', (req, res) => {
+    res.render('index', {
+        myVar : myVar
+    })
+})
+
 app.listen(port, () =>console.log('the app is running'))
