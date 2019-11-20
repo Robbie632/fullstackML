@@ -2,6 +2,7 @@ const express = require('express')
 const hbs = require('hbs')
 const request = require('request')
 const path = require('path')
+const bodyParser = require('body-parser')
 /*here I'm using destructuring, in the braces on the left is the name of the
 object method that I want, the resulting object will be the same as the name of
 the method in the ./utils object*/
@@ -14,7 +15,8 @@ app.set('view engine', 'hbs')
 //below line defines which folder contains client side JavaScript files
 app.use(express.static('js'))
 
-
+//below lin edefines method of parsing POST body payloads
+app.use(bodyParser.json())
 /*train and predict api endpoints*/
 app.get('/train', (req, res) => {
 
@@ -28,18 +30,17 @@ app.get('/train', (req, res) => {
 
 })
 
-app.get('/predict', (req, res) => {
-    if (!req.query.predictRequest) {
-        return('predict node api error')
-    } else {
-        res.send({
-            message: 'response from predict api'
-        })
-    }
+app.post('/predict', (req, res) => {
+console.log(req.body)
+    res.send({
+        message: `your passenger died ${req.body.name}`
+    })
+    res.end()
 })
 
 
 // all code below is for practise
+/*
 const { callDarkSky } = require('./utils')
 
 callDarkSky('37.8267', '-122.4233', (error, response) => {
@@ -72,7 +73,7 @@ app.get('/testStringQuery', (req, res) => {
     /*req stands for requests
     req.search object is the string query passed into the browser currently
     fo passing the string query search put the below url into your browser
-    localhost:3000/testStringQuery?search=<param_of_your_choice>*/
+    localhost:3000/testStringQuery?search=<param_of_your_choice>
     if (!req.query.search) {
 
         return(console.log('no search'))
@@ -85,7 +86,7 @@ app.get('/testStringQuery', (req, res) => {
         my:'friend'
     })
 })
-
+*/
 const myVar = 'Ive injected a variable for templating'
 
 app.get('/plotlytest', (req, res) => {

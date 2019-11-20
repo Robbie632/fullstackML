@@ -4,7 +4,8 @@
   "description": "full stack service for machine learning",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,12 @@
   },
   "homepage": "https://github.com/Robbie632/fullstackML#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "hbs": "^4.0.6",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0"
   }
 }
