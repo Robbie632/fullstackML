@@ -48,7 +48,7 @@ app.post('/predict', (req, res) => {
         req.body,
         (error, res, body) => {
             return(body)
-        }
+        })
 
 
     //endpoint of flask predict API

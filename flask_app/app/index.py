@@ -28,7 +28,8 @@ def train():
     #write new data to database
     #retrain model
     #restore emodel
-    return('return from train API')
+    flask_train_data = 'flask train data'
+    return('return from train API, received {0}'.format(flask_train_data))
 
 
 @app.route('/predict', methods = ['POST'])
@@ -39,7 +40,8 @@ def predict():
     #load model
     #predict
     #return prediction
-    return('return from predict API, data sent was {0}'.format(content))
+    flask_predict_data = 'flask predict data'
+    return('return from predict API, received {0}'.format(flask_predict_data))
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.

@@ -10,3 +10,7 @@ WORKDIR /app
 #move python app entry point and requirements files into container
 COPY /app/index.py /app
 COPY /app/requirements.txt /app
+
+Run pip install -r /app/requirements.txt
+
+CMD ["python", "/app/index.py"]
