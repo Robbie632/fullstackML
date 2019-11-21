@@ -9,12 +9,8 @@ COPY /app/node_modules /app/node_modules
 WORKDIR /app
 
 #copy metadata on dependencies to container
-COPY package-lock.json /app
-COPY package-lock.json /app
-
-#copy metadata on dependencies to container
-COPY package.json /app
-COPY package.json /app
+COPY app/package-lock.json /app
+COPY app/package.json /app
 
 #copy node front end pages into container
 WORKDIR /app/views
@@ -33,4 +29,4 @@ copy /app/index.js /app
 EXPOSE 3000
 
 #run app with node
-CMD ['node', '/app/index.js']
+CMD ["node", "/app/index.js"]

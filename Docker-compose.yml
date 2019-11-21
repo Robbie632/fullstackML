@@ -9,19 +9,19 @@ services:
     networks:
       - fullStackML
 
-  mongo:
-    container_name: mongo
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    networks:
-      - fullStackML
-    ports:
-      - "27017:27017"
+  # mongo:
+  #   container_name: mongo
+  #   image: mongo
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   networks:
+  #     - fullStackML
+  #   ports:
+  #     - "27017:27017"
 
-      
+
 networks:
   fullStackML:
     driver: bridge
