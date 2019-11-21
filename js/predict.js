@@ -1,19 +1,10 @@
-console.log('client side javascript file loaded')
+console.log('client side predict javascript file loaded')
 
+//get predict form by element id
 const inputForm = document.querySelector('#predictionForm')
 
-//define object containing data inputted into form search box
-
-//This selects the tag with the id 'message'
+//this is the html element that will be changed after API request
 const messageOutput = document.querySelector('#predictOutput')
-
-/*
-The below code does the following
-- takes input from a html form
-- creates stringquery from the form inout
-- makes an API call to the web server suing the stringquery and fetch
-- logs the API call response
-*/
 
 inputForm.addEventListener('submit', (e)  => {
     /*the below line of code is very standard, if it was not ececuted then the
@@ -22,26 +13,39 @@ inputForm.addEventListener('submit', (e)  => {
 
     console.log('form submitted')
 
+    //extract data from form and assig to object
     const formData = {
         name: inputForm.name.value,
-        passengerClass: "1",
-        sex: "M",
+        age: inputForm.age.value,
+        fare: inputForm.fare.value,
+        cabin: inputForm.cabin.value,
+        sex: inputForm.sex.value,
+        embark: inputForm.embark.value
     };
 
-    //create query query string
+    /*create query query string
+    API requests can either be GET or post
+    when largeer amounts of data have to be transmitted then do POST with data
+    in the body as a payload*/
+
+    //string query below with no string params because using POST
     apiQuery = "http://localhost:3000/predict"
 
-    //input query string to fetch to make API call
     fetch(apiQuery, {
+        //POST API call
         method:'POST',
+        //body payload always has to be in string form
         body:JSON.stringify(formData),
+        //need to tell server side node type of data
         headers:{
             'Content-Type':'application/json'
         }
     }).then((apiResponse) => {
         apiResponse.json().then((jsonOut) => {
         console.log(jsonOut)
-        messageOutput.textContent = jsonOut.message
+
+        //convert html element text to
+        messageOutput.textContent = jsonOut.message.age
         })
     })
 })
