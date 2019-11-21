@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
 
 /*train and predict api endpoints*/
 app.post('/train', (req, res) => {
-
     if (!req.query.train) {
         return('train node api error')
     } else {
@@ -37,21 +36,29 @@ app.post('/train', (req, res) => {
 /*this is a POST API endpoint which takes a payload in the body key of the POST
 call*/
 app.post('/predict', (req, res) => {
-console.log(req.body)
+
+    //receive POST request
     if (!req.body.data1) {
         return('predict api error')
     }
 
-    //send POST api request to flask predict API
-    apiQuery = "http://node_app:<port>/predict"
+    //send body of returned POST api request to flask predict API as POST request
+    body = request.post(
+        'http://node_app:5000/predict',
+        req.body,
+        (error, res, body) => {
+            return(body)
+        }
+
+
+    //endpoint of flask predict API
+    apiQuery = "http://node_app:5000/predict"
     //send response back to POST request
 
-
+    //send back response from flask endpoint back to client side javascript
     res.send({
-        message: `your passenger died ${req.body.name}`
+        message: `your passenger died ${req.body}`
     })
-
-
     res.end()
 })
 

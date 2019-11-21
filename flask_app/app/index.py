@@ -39,7 +39,7 @@ def predict():
     #load model
     #predict
     #return prediction
-    return('return from predict API')
+    return('return from predict API, data sent was {0}'.format(content))
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.
