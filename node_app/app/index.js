@@ -41,10 +41,17 @@ console.log(req.body)
     if (!req.body.data1) {
         return('predict api error')
     }
+
+    //send POST api request to flask predict API
+    apiQuery = "http://node_app:<port>/predict"
     //send response back to POST request
+
+
     res.send({
         message: `your passenger died ${req.body.name}`
     })
+
+
     res.end()
 })
 
