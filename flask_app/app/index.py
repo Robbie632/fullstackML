@@ -7,6 +7,13 @@ import os
 
 app = Flask(__name__)
 
+
+
+'''heroku specifies a port to run app on as an environemental variable port
+when running local thei svariable wont be availabel and so th eapp will
+run on port 5000'''
+port = int(os.environ.get('PORT', 5000))
+
 mongo_client = MongoClient('mongodb://root:example@mongo:27017')
 
 #create or access my datbase
@@ -45,5 +52,4 @@ def predict():
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
     app.run(host = '0.0.0.0', port = port, debug = True)
