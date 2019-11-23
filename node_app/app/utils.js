@@ -15,14 +15,17 @@ class MyMongoCRUD {
     }
 
     write(data) {
-    /**
+        /**
          * Writes to mongodb .
          *
          * @param {object} data-data to write to database
          *
          * @example
          *
-         *     myObject.write()
+         *  myObject.write({
+                field1 : 'data1',
+                field2 : 'data2'
+            })
          */
 
         const mongodb = require('mongodb')
@@ -40,6 +43,7 @@ class MyMongoCRUD {
                 console.log('connected correctly to mongodb')
                 const db = client.db(this._database)
                 db.collection('test_node_collection').insertOne(data)
+                console.log('written to db')
             })
 
         } else {

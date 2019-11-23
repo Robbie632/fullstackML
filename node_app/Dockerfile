@@ -24,7 +24,7 @@ WORKDIR /app
 
 #copy entry point files into container
 copy /app/index.js /app
-copy /app/mongoDBTest.js /app
+copy /app/utils.js /app
 
 #expose port 3000 in contaienr to node app
 EXPOSE 3000

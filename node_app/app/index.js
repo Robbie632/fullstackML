@@ -13,9 +13,9 @@ const myCRUD = new MyMongoCRUD("mongodb://root:example@mongo:27017", 'myDatabase
 
 myCRUD.read()
 myCRUD.write({
-    firstField: 1,
-    secondField: 2,
-    thirdField: 3
+    testfirstField: 1,
+    testsecondField: 2,
+    testthirdField: 3
 })
 
 const app = express()
