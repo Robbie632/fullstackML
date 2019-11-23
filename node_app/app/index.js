@@ -3,11 +3,20 @@ const hbs = require('hbs')
 const request = require('request')
 const path = require('path')
 const bodyParser = require('body-parser')
-const { writeDB } = require('./mongoDBTest')
-const { readDB } = require('./mongoDBTest')
+//const { writeDB } = require('./mongoDBTest')
+//const { readDB } = require('./mongoDBTest')
+const { MyMongoCRUD } = require('./utils')
 
-writeDB()
-readDB()
+
+//instantiate new object
+const myCRUD = new MyMongoCRUD("mongodb://root:example@mongo:27017", 'myDatabase')
+
+myCRUD.read()
+myCRUD.write({
+    firstField: 1,
+    secondField: 2,
+    thirdField: 3
+})
 
 const app = express()
 
