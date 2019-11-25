@@ -3,20 +3,66 @@ const hbs = require('hbs')
 const request = require('request')
 const path = require('path')
 const bodyParser = require('body-parser')
-//const { writeDB } = require('./mongoDBTest')
-//const { readDB } = require('./mongoDBTest')
-const { MyMongoCRUD } = require('./utils')
+
+//const { MyMongoCRUD } = require('./utils')
+//const { MyMongooseCRUD } = require('./utils')
+const { MyFunc } = require('./utils')
+const { MyFuncWrite } = require('./utils')
+
+//const { MyMongooseCRUD } = require('./funcs')
+
+const model = MyFunc("mongodb://root:example@mongo:27017/myDatabase", 'myCollection')
+
+
+
+MyFuncWrite(model, {
+    name: 'Mongoose',
+    age: 7,
+    fare: 9
+})
+
 
 
 //instantiate new object
-const myCRUD = new MyMongoCRUD("mongodb://root:example@mongo:27017", 'myDatabase')
+// const myCRUD = new MyMongoCRUD("mongodb://root:example@mongo:27017", 'myDatabase')
+//
+// //remove everything from db
+// myCRUD.removeAll()
+// //write to db
+// myCRUD.write({
+//     testfirstField: 1,
+//     testsecondField: 7,
+//     testthirdField: 9
+// })
+// myCRUD.write({
+//     testfirstField: 1,
+//     testsecondField: 6,
+//     testthirdField: 4
+// })
+// myCRUD.write({
+//     testfirstField: 2,
+//     testsecondField: 2,
+//     testthirdField: 3
+// })
+//
+// //read everything from db
+//
+// myCRUD.readAll()
+//
+// //read filtered
+// myCRUD.readSpecific('testfirstField', 1)
 
-myCRUD.read()
-myCRUD.write({
-    testfirstField: 1,
-    testsecondField: 2,
-    testthirdField: 3
-})
+// myDB = new MyMongooseCRUD("mongodb://root:example@mongo:27017/myDatabase")
+//
+// myDB.createModel('myCollection')
+//
+// myDB.addPassenger({
+//     name:'Mongoose',
+//     age:23,
+//     fare:16
+// })
+
+
 
 const app = express()
 
