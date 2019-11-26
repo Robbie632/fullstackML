@@ -40,13 +40,13 @@ app.use(bodyParser.json())
 const callFlaskApi = (apiQuery, body, callback) => {
     request.post(
         apiQuery,
-        string(body),
+        body,
         (error, response) => {
             if (error) {
-                callback('error in repsonse from flask predict api', undefined)
+                callback(`error in repsonse from flask predict api ${error}`, undefined)
             }
 
-            callback(undefined, body)
+            callback(undefined, response.body)
         })
 }
 
@@ -113,21 +113,19 @@ app.post('/predict', (req, res) => {
     //endpoint of flask predict API
     apiQuery = "http://flask_app:5000/predict"
 
-    callFlaskMock(apiQuery, res, string(req.body), (error, data) => {
+    callFlaskApi(apiQuery, req.body, (error, data) => {
         if (error) {
             res.send(error)
         } else {
             //perhps this isn't working because I cant send data
             res.send(data)
+
         }
+        res.end()
     })
 
 
     //send back response from flask endpoint back to client side javascript
-    res.send({
-        message: `your passenger died ${req.body}`
-    })
-    res.end()
 })
 
 //webpages
