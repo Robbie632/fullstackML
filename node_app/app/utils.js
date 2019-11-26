@@ -13,9 +13,15 @@ const connectToDB = (url, modelName) => {
     const connectionStatus = mongoose.connection
 
     const passengerSchema = mongoose.Schema({
-    name: String,
-    age: Number,
-    fare: Number
+        name: String,
+        age: Number,
+        fare: Number,
+        cabin: Number,
+        sex: Number,
+        nosiblings: Number,
+        embark: String,
+        label: String
+
     })
 
     const model = mongoose.model('myCollection', passengerSchema)
@@ -36,6 +42,9 @@ const writeToDB = (model, data, connectionStatus) => {
     console.log('2')
     connectionStatus.once('open', () => {
         console.log('checking db connection')
+        console.log('data in writeToDB')
+        console.log(data)
+        console.log(typeof data)
         const passenger = new model(data)
         console.log('passenger')
         console.log(passenger)

@@ -21,6 +21,7 @@ inputForm.addEventListener('submit', (e)  => {
         fare: inputForm.fare.value,
         cabin: inputForm.cabin.value,
         sex: inputForm.sex.value,
+        nosiblings:inputForm.siblings.value,
         embark: inputForm.embark.value,
         label: inputForm.label.value
     };
@@ -46,7 +47,6 @@ inputForm.addEventListener('submit', (e)  => {
     }).then((apiResponse) => {
         apiResponse.json().then((jsonOut) => {
         console.log(jsonOut)
-
         //convert html element text to
         messageOutput.textContent = jsonOut.message.age
         })

@@ -4,26 +4,18 @@ const request = require('request')
 const path = require('path')
 const bodyParser = require('body-parser')
 
-//const { MyMongoCRUD } = require('./utils')
-//const { MyMongooseCRUD } = require('./utils')
+
+
 const { connectToDB } = require('./utils')
 const { writeToDB } = require('./utils')
 
-//const { MyMongooseCRUD } = require('./funcs')
+
 
 
 //the connection wont work unless ?authyAource=admin is stuck on the end
 const { model, connectionStatus } = connectToDB("mongodb://root:example@mongo:27017/myDatabase?authSource=admin", 'myCollection')
 
-writeToDB(
-    model,
-    {
-        name: 'Mongoose',
-        age: 7,
-        fare: 9
-    },
-    connectionStatus
-)
+
 
 
 
@@ -68,13 +60,39 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+
+app.post('/test', (req, res)=> {
+res.send('hello')
+    console.log(typeof req.body)
+
+})
+
+
+
 /*train and predict api endpoints*/
 app.post('/train', (req, res) => {
-    if (!req.query.train) {
+    if (!req.body) {
         return('train node api error')
     } else {
+        //write to mongodb
+        console.log('model2')
+        console.log(model)
+        writeToDB(
+            model,
+            {
+                "name": req.body.name,
+                "age": req.body.age,
+                "fare": req.body.fare,
+                "cabin": req.body.cabin,
+                "sex": req.body.sex,
+                "nosiblings": req.body.nosiblings,
+                "embark": req.body.embark,
+                "label": req.body.label
+            },
+            connectionStatus
+        )
         res.send({
-            message: `response from train api ${req.body}`
+            message: `response from train api ${req.body.name}`
         })
         res.end()
     }
