@@ -27,49 +27,6 @@ writeToDB(
 
 
 
-
-
-//instantiate new object
-// const myCRUD = new MyMongoCRUD("mongodb://root:example@mongo:27017", 'myDatabase')
-//
-// //remove everything from db
-// myCRUD.removeAll()
-// //write to db
-// myCRUD.write({
-//     testfirstField: 1,
-//     testsecondField: 7,
-//     testthirdField: 9
-// })
-// myCRUD.write({
-//     testfirstField: 1,
-//     testsecondField: 6,
-//     testthirdField: 4
-// })
-// myCRUD.write({
-//     testfirstField: 2,
-//     testsecondField: 2,
-//     testthirdField: 3
-// })
-//
-// //read everything from db
-//
-// myCRUD.readAll()
-//
-// //read filtered
-// myCRUD.readSpecific('testfirstField', 1)
-
-// myDB = new MyMongooseCRUD("mongodb://root:example@mongo:27017/myDatabase")
-//
-// myDB.createModel('myCollection')
-//
-// myDB.addPassenger({
-//     name:'Mongoose',
-//     age:23,
-//     fare:16
-// })
-
-
-
 const app = express()
 
 /*heroku specifies a port to run app on as an environemental variable port
@@ -117,7 +74,7 @@ app.post('/train', (req, res) => {
         return('train node api error')
     } else {
         res.send({
-            message: `response from train api ${req.body.name}`
+            message: `response from train api ${req.body}`
         })
         res.end()
     }
