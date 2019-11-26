@@ -6,20 +6,26 @@ const bodyParser = require('body-parser')
 
 //const { MyMongoCRUD } = require('./utils')
 //const { MyMongooseCRUD } = require('./utils')
-const { MyFunc } = require('./utils')
-const { MyFuncWrite } = require('./utils')
+const { connectToDB } = require('./utils')
+const { writeToDB } = require('./utils')
 
 //const { MyMongooseCRUD } = require('./funcs')
 
-const model = MyFunc("mongodb://root:example@mongo:27017/myDatabase", 'myCollection')
+
+//the connection wont work unless ?authyAource=admin is stuck on the end
+const { model, connectionStatus } = connectToDB("mongodb://root:example@mongo:27017/myDatabase?authSource=admin", 'myCollection')
+
+writeToDB(
+    model,
+    {
+        name: 'Mongoose',
+        age: 7,
+        fare: 9
+    },
+    connectionStatus
+)
 
 
-
-MyFuncWrite(model, {
-    name: 'Mongoose',
-    age: 7,
-    fare: 9
-})
 
 
 
