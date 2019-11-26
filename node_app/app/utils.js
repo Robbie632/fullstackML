@@ -1,13 +1,14 @@
 //mongodb functions
+const mongoose = require('mongoose')
 
 const connectToDB = (url, modelName) => {
-
-    const mongoose = require('mongoose')
 
     mongoose.connect(url, {
         useNewUrlParser : true,
         useCreateIndex : true,
         useUnifiedTopology: true
+    }).catch((error)=>{
+        console.log(error)
     })
 
     const connectionStatus = mongoose.connection
@@ -25,10 +26,7 @@ const connectToDB = (url, modelName) => {
     })
 
     const model = mongoose.model('myCollection', passengerSchema)
-    console.log('model')
-    console.log(model)
-    console.log('connectionStatus')
-    console.log(connectionStatus)
+
     return({
         model: model,
         connectionStatus: connectionStatus
@@ -36,7 +34,7 @@ const connectToDB = (url, modelName) => {
 }
 
 const writeToDB = (model, data, connectionStatus) => {
-    const mongoose = require('mongoose')
+
     console.log('1')
     connectionStatus.on('error', console.error.bind(console, 'Connection error'))
     console.log('2')
