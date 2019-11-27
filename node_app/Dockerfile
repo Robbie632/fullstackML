@@ -25,9 +25,11 @@ WORKDIR /app
 #copy entry point files into container
 copy /app/index.js /app
 copy /app/utils.js /app
+copy /app/callbackDB.js /app
+copy /app/boot.js /app
 
 #expose port 3000 in contaienr to node app
 EXPOSE 3000
 
 #run app with node
-CMD ["node", "/app/index.js"]
+CMD ["node", "/app/boot.js"]

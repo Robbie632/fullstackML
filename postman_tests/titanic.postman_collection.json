@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "cf4d4417-efd0-48f8-b46c-3b34215ca58c",
+		"name": "titanic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "train",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Robbie\",\n\t\"age\": \"2\",\n\t\"fare\": \"2\",\n\t\"cabin\": \"32\",\n\t\"sex\": \"Male\",\n\t\"nosiblings\": \"3\",\n    \"embark\": \"southampton\",\n    \"label\": \"died\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/train",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"train"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "train POST request"
+			},
+			"response": []
+		},
+		{
+			"name": "predict",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Robbie\",\n\t\"age\": \"2\",\n\t\"fare\": \"2\",\n\t\"cabin\": \"32\",\n\t\"sex\": \"Male\",\n\t\"nosiblings\": \"3\",\n    \"embark\": \"southampton\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/predict",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -2,7 +2,7 @@
   "name": "fullstackml",
   "version": "1.0.0",
   "description": "full stack service for machine learning",
-  "main": "index.js",
+  "main": "boot.js",
   "scripts": {
     "test": "test",
     "start": "nodemon"

@@ -1,7 +1,7 @@
 //mongodb functions
 const mongoose = require('mongoose')
 
-const connectToDB = (url, modelName) => {
+const connectToDB = (url, modelName, callback) => {
 
     mongoose.connect(url, {
         useNewUrlParser : true,
