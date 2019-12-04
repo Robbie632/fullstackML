@@ -1,4 +1,4 @@
-appFunc = (error, data, connectionStatus, model) => {
+app = (mongoose) => {
     if (error) {
         return(console.log(error))
     }
@@ -8,10 +8,6 @@ appFunc = (error, data, connectionStatus, model) => {
     const path = require('path')
     const bodyParser = require('body-parser')
 
-    const { writeToDB } = require('./callbackDB')
-
-
-
     const app = express()
 
     /*heroku specifies a port to run app on as an environemental variable port
@@ -20,13 +16,36 @@ appFunc = (error, data, connectionStatus, model) => {
     const port = process.env.PORT || 3000
 
     /*app congigs*/
-    //below line of code defines which templating library is being used
     app.set('view engine', 'hbs')
-    //below line defines which folder contains client side JavaScript files
     app.use(express.static('js'))
-    //below line defines method of parsing POST body payloads
     app.use(bodyParser.json())
 
+
+
+//db pratcise
+//********************************************************** */
+/**/
+//write
+const user = new permissionModel({
+    name: 3000,
+    age : 2875,
+    class : 8547
+})
+
+user.save(function (err, user) {
+    if (err) return console.error(err)
+    console.log(user)
+})
+
+
+//read
+/*
+makePermissionsModel(mongoose).find({}, (err, data) => {
+    if (err) return console.log(err)
+    console.log(`data read from permissions collection data: ${data}`)
+})*/
+    
+//********************************************************** */
 
     //set up db
 
@@ -57,18 +76,7 @@ appFunc = (error, data, connectionStatus, model) => {
         if (!req.body) {
             return('train node api error')
         } else {
-            writeToDB({
-                "name": req.body.name,
-                "age": req.body.age,
-                "fare": req.body.fare,
-                "cabin": req.body.cabin,
-                "sex": req.body.sex,
-                "nosiblings": req.body.nosiblings,
-                "embark": req.body.embark,
-                "label": req.body.label
-            },
-            connectionStatus,
-            model,
+            //write to db here
             (error) => {
                 if (error) {
                     return(console.log(`error from writedb ${error}`))

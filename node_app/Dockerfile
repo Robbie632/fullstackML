@@ -23,10 +23,10 @@ COPY /app/js /app/js
 WORKDIR /app
 
 #copy entry point files into container
-copy /app/index.js /app
-copy /app/utils.js /app
-copy /app/callbackDB.js /app
-copy /app/boot.js /app
+COPY /app/index.js /app
+COPY /app/utils.js /app
+COPY /app/callbackDB.js /app
+COPY /app/boot.js /app
 
 #expose port 3000 in contaienr to node app
 EXPOSE 3000
