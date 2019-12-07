@@ -2,12 +2,9 @@ from pymongo import MongoClient
 from flask import Flask, request, jsonify
 import os
 #from utils.train import train
-#from utils.predict import predict
-
+from utils.predict import predict
 
 app = Flask(__name__)
-
-
 
 '''heroku specifies a port to run app on as an environemental variable port
 when running local thei svariable wont be availabel and so th eapp will
@@ -25,7 +22,7 @@ my_collection = mydb['collection_name']
 def index():
     return('flask homepage')
 
-#set up API POSt endpoint
+# set up API POST endpoint
 @app.route('/train', methods=['POST'])
 def train():
     content = request.json
@@ -46,9 +43,9 @@ def predict():
     #manipulate data into useable format
     #load model
     #predict
-    #return prediction
-    flask_predict_data = 'flask predict data'
-    return('return from predict API, received {0}'.format(flask_predict_data))
+    prediction = predict({ 'sex': 'M' })
+
+    return { 'prediction': prediction }
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.

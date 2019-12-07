@@ -5,3 +5,4 @@ wtforms
 pymongo==3.9.0
 Flask-WTF
 flask
+joblib
