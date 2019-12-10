@@ -86,7 +86,7 @@ makePermissionsModel(mongoose).find({}, (err, data) => {
                 })
                 res.end()
 
-            })
+            }
         }
     })
 
@@ -135,5 +135,5 @@ makePermissionsModel(mongoose).find({}, (err, data) => {
 }
 
 module.exports = {
-    appFunc : appFunc
+    app : app
 }
