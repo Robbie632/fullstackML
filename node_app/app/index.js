@@ -1,7 +1,5 @@
 app = (mongoose) => {
-    if (error) {
-        return(console.log(error))
-    }
+
     const express = require('express')
     const hbs = require('hbs')
     const request = require('request')
