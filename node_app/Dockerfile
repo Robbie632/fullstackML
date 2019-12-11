@@ -27,6 +27,7 @@ COPY /app/index.js /app
 COPY /app/utils.js /app
 COPY /app/callbackDB.js /app
 COPY /app/boot.js /app
+COPY /app/models.js /app
 
 #expose port 3000 in contaienr to node app
 EXPOSE 3000

@@ -5,6 +5,7 @@ app = (mongoose) => {
     const request = require('request')
     const path = require('path')
     const bodyParser = require('body-parser')
+    const { makeDataModel } = require('./models.js')
 
     const app = express()
 
@@ -18,32 +19,35 @@ app = (mongoose) => {
     app.use(express.static('js'))
     app.use(bodyParser.json())
 
+    //define data models
+    const dataModel = makeDataModel(mongoose)
 
 
-//db pratcise
-//********************************************************** */
-/**/
-//write
-const user = new permissionModel({
-    name: 3000,
-    age : 2875,
-    class : 8547
-})
+    //db pratcise
+    //********************************************************** */
+    /**/
+    //write
 
-user.save(function (err, user) {
-    if (err) return console.error(err)
-    console.log(user)
-})
+    const user = new dataModel({
+        name: 3000,
+        age : 2875,
+        class : 8547
+    })
+
+    user.save(function (err, user) {
+        if (err) return console.error(err)
+        console.log(user)
+    })
 
 
-//read
-/*
-makePermissionsModel(mongoose).find({}, (err, data) => {
-    if (err) return console.log(err)
-    console.log(`data read from permissions collection data: ${data}`)
-})*/
-    
-//********************************************************** */
+    //read
+    /*
+    makePermissionsModel(mongoose).find({}, (err, data) => {
+        if (err) return console.log(err)
+        console.log(`data read from permissions collection data: ${data}`)
+    })*/
+        
+    //********************************************************** */
 
     //set up db
 
