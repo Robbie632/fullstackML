@@ -43,9 +43,9 @@ def predict():
     #manipulate data into useable format
     #load model
     #predict
-    prediction = predictClass({ 'sex': 'M' })
+    predictionOut = predictClass()
 
-    return { 'prediction': prediction }
+    return(predictionOut)
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.

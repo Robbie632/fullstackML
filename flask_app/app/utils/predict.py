@@ -7,6 +7,6 @@
 #         [0, 20, 0, 0, 0, 0]
 #     ])
 
-def predictClass(passenger):
+def predictClass():
     
-    return('prediction')
+    return({'prediction': 'dead'})

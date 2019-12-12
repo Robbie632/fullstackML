@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const { makeDataModel } = require('./models.js')
 const axios = require('axios')
 const { callFlaskApi } = require('./endpoints/callFlask')
+const util = require('util')
 
 
 app = (mongoose) => {
@@ -86,14 +87,22 @@ app = (mongoose) => {
 
     /*this is a POST API endpoint which takes a payload in the body key of the POST
     call*/
-    app.post('/predict', (req, res) => {
+    app.post('/predict', async (req, res) => {
 
         if (!req.body) {
             return('node /predict error')
         }
-        const flaskResponse = callFlaskApi(req.body)
-        res.send(flaskResponse)    
-        res.end()
+        try {
+            const flaskResponse = await callFlaskApi(req.body)
+            //the above line returns an [object Object]
+            res.send(flaskResponse.data)
+
+            res.end()
+
+        } catch (error) {
+            return(console.log(error))
+        }
+       
     })
     
 
