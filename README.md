@@ -14,3 +14,8 @@ services:
 * flask service - provides endpoints for node service to query, does machine learning training and predictions in python
 
 * mongodb service - holds training data
+
+
+
+Belwo is a schematic showing the microservices architecture and API routes:
+![alt text](readMeImages/architecture.jpg "architecture")
