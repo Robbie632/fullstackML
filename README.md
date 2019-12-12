@@ -17,5 +17,5 @@ services:
 
 
 
-Belwo is a schematic showing the microservices architecture and API routes:
+Below is a schematic showing the microservices architecture and API routes:
 ![alt text](readMeImages/architecture.jpg "architecture")
