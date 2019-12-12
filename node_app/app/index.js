@@ -1,11 +1,14 @@
-app = (mongoose) => {
+const express = require('express')
+const hbs = require('hbs')
+const request = require('request')
+const path = require('path')
+const bodyParser = require('body-parser')
+const { makeDataModel } = require('./models.js')
+const axios = require('axios')
+const { callFlaskApi } = require('./endpoints/callFlask')
 
-    const express = require('express')
-    const hbs = require('hbs')
-    const request = require('request')
-    const path = require('path')
-    const bodyParser = require('body-parser')
-    const { makeDataModel } = require('./models.js')
+
+app = (mongoose) => {
 
     const app = express()
 
@@ -54,18 +57,7 @@ app = (mongoose) => {
 
     //functions
 
-    const callFlaskApi = (apiQuery, body, callback) => {
-        request.post(
-            apiQuery,
-            body,
-            (error, response) => {
-                if (error) {
-                    callback(`error in repsonse from flask predict api ${error}`, undefined)
-                }
 
-                callback(undefined, response.body)
-            })
-    }
 
 
 
@@ -96,30 +88,14 @@ app = (mongoose) => {
     call*/
     app.post('/predict', (req, res) => {
 
-        //receive POST request
-        console.log('this is the response' + req.body)
         if (!req.body) {
-            return('predict api error')
+            return('node /predict error')
         }
-
-        //send body of returned POST api request to flask predict API as POST request
-        //endpoint of flask predict API
-        apiQuery = "http://flask_app:5000/predict"
-
-        callFlaskApi(apiQuery, req.body, (error, data) => {
-            if (error) {
-                res.send(error)
-            } else {
-                //perhps this isn't working because I cant send data
-                res.send(data)
-
-            }
-            res.end()
-        })
-
-
-        //send back response from flask endpoint back to client side javascript
+        const flaskResponse = callFlaskApi(req.body)
+        res.send(flaskResponse)    
+        res.end()
     })
+    
 
     //webpages
     app.get('/model_prediction', (req, res) => {

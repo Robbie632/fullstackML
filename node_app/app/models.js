@@ -1,5 +1,3 @@
-const { mongoose } = require('./boot.js')
-
 const makeDataModel = (mongoose) => {
 
 
@@ -19,10 +17,6 @@ const makeDataModel = (mongoose) => {
 
   return dataModel
 }
-
-
-
-
 
 module.exports = {
     makeDataModel: makeDataModel

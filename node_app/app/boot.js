@@ -12,9 +12,4 @@ mongoose.connect("mongodb://root:example@mongo:27017/data?authSource=admin", {
     useUnifiedTopology: true
 }).then(app(mongoose)).catch(error => handleError(error))
 
-module.exports = {
-    mongoose:mongoose
-}
-
-//handle errors during connection
 

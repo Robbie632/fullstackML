@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from flask import Flask, request, jsonify
 import os
 #from utils.train import train
-from utils.predict import predict
+from utils.predict import predictClass
 
 app = Flask(__name__)
 
@@ -43,7 +43,7 @@ def predict():
     #manipulate data into useable format
     #load model
     #predict
-    prediction = predict({ 'sex': 'M' })
+    prediction = predictClass({ 'sex': 'M' })
 
     return { 'prediction': prediction }
 
