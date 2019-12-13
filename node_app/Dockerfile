@@ -30,7 +30,6 @@ WORKDIR /app
 #copy entry point files into container
 COPY /app/index.js /app
 COPY /app/boot.js /app
-COPY /app/models.js /app
 
 #expose port 3000 in container to node app
 EXPOSE 3000

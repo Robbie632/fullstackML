@@ -30,7 +30,7 @@ inputForm.addEventListener('submit', (e)  => {
 
     //string query below with no string params because using POST
     //when deploying with heroku would have to use relative path eg /predict
-    apiQuery = "http://localhost:3000/predict"
+    apiQuery = "/predict"
 
     fetch(apiQuery, {
         //POST API call

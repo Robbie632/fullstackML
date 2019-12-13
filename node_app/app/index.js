@@ -3,63 +3,20 @@ const hbs = require('hbs')
 const request = require('request')
 const path = require('path')
 const bodyParser = require('body-parser')
-const { makeDataModel } = require('./models.js')
 const axios = require('axios')
 const { callFlaskApi } = require('./endpoints/callFlask')
 const util = require('util')
 
 
-app = (mongoose) => {
+app = () => {
 
     const app = express()
-
-    /*heroku specifies a port to run app on as an environemental variable port
-    when running local thei svariable wont be availabel and so th eapp will
-    run on port 3000*/
     const port = process.env.PORT || 3000
 
-    /*app congigs*/
+    /*app configs*/
     app.set('view engine', 'hbs')
     app.use(express.static('js'))
     app.use(bodyParser.json())
-
-    //define data models
-    const dataModel = makeDataModel(mongoose)
-
-
-    //db pratcise
-    //********************************************************** */
-    /**/
-    //write
-
-    const user = new dataModel({
-        name: 3000,
-        age : 2875,
-        class : 8547
-    })
-
-    user.save(function (err, user) {
-        if (err) return console.error(err)
-        console.log(user)
-    })
-
-
-    //read
-    /*
-    makePermissionsModel(mongoose).find({}, (err, data) => {
-        if (err) return console.log(err)
-        console.log(`data read from permissions collection data: ${data}`)
-    })*/
-        
-    //********************************************************** */
-
-    //set up db
-
-
-    //functions
-
-
-
 
 
     app.get('/', (req, res) => {

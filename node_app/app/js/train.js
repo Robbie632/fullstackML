@@ -12,7 +12,6 @@ inputForm.addEventListener('submit', (e)  => {
     page would just refresh*/
     e.preventDefault()
 
-    console.log('form submitted')
 
     //extract data from form and assig to object
     const formData = {
@@ -33,22 +32,22 @@ inputForm.addEventListener('submit', (e)  => {
 
     //string query below with no string params because using POST
     //when deploying with heroku would have to use relative path eg /predict
-    apiQuery = "http://localhost:3000/train"
+    apiQuery = "/train"
 
     fetch(apiQuery, {
-        //POST API call
         method:'POST',
         //body payload always has to be in string form
         body:JSON.stringify(formData),
-        //need to tell server side node type of data
         headers:{
             'Content-Type':'application/json'
         }
     }).then((apiResponse) => {
         apiResponse.json().then((jsonOut) => {
-        console.log(jsonOut)
-        //convert html element text to
-        messageOutput.textContent = jsonOut.message.age
+        console.log(`jsonOut is ${jsonOut}`)
+        //convert html element text to message
+        messageOutput.textContent = 'thankyou, your data has been submitted'
+        }).catch((error) => {
+            return(console.log(error))
         })
     })
 })
