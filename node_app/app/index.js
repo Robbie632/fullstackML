@@ -67,22 +67,19 @@ app = (mongoose) => {
     })
 
     /*train and predict api endpoints*/
-    app.post('/train', (req, res) => {
+    app.post('/train', async (req, res) => {
         if (!req.body) {
             return('train node api error')
-        } else {
-            //write to db here
-            (error) => {
-                if (error) {
-                    return(console.log(`error from writedb ${error}`))
-                }
-                res.send({
-                    message: `response from train api ${req.body.name}`
-                })
-                res.end()
-
-            }
         }
+        try {
+            const flaskResponse = await callFlaskApi(req.body, '/train')
+            res.send(flaskResponse.data)
+            res.end()
+        } catch (error) {
+            return(console.log(error))
+        }
+
+        
     })
 
     /*this is a POST API endpoint which takes a payload in the body key of the POST
@@ -93,7 +90,7 @@ app = (mongoose) => {
             return('node /predict error')
         }
         try {
-            const flaskResponse = await callFlaskApi(req.body)
+            const flaskResponse = await callFlaskApi(req.body, '/predict')
             //the above line returns an [object Object]
             res.send(flaskResponse.data)
 

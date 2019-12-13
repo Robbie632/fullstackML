@@ -1,6 +1,6 @@
 axios = require('axios')
 
-async function callFlaskApi(body) {
+async function callFlaskApi(body, endpoint) {
 
     instance = axios.create({
         baseURL: 'http://flask_app:5000/',
@@ -9,7 +9,7 @@ async function callFlaskApi(body) {
     })
 
     try {
-        const flaskOutput = await instance.post('/predict', body)
+        const flaskOutput = await instance.post(endpoint, body)
         return(flaskOutput)
 
     } catch (error) {

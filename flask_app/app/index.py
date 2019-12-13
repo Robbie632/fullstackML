@@ -1,7 +1,6 @@
-from pymongo import MongoClient
 from flask import Flask, request, jsonify
 import os
-#from utils.train import train
+from utils.train import writeToMongo
 from utils.predict import predictClass
 
 app = Flask(__name__)
@@ -11,12 +10,6 @@ when running local thei svariable wont be availabel and so th eapp will
 run on port 5000'''
 port = int(os.environ.get('PORT', 5000))
 
-mongo_client = MongoClient('mongodb://root:example@mongo:27017')
-
-#create or access my datbase
-mydb = mongo_client['document_name']
-
-my_collection = mydb['collection_name']
 
 @app.route('/')
 def index():
@@ -26,14 +19,17 @@ def index():
 @app.route('/train', methods=['POST'])
 def train():
     content = request.json
-    #accept request
-    #manipulate data into useable format
-    #respond saying that the new model is being trained
-    #write new data to database
-    #retrain model
-    #restore emodel
+    writeToMongo(content, 'train')
+    
+    #do all below in train script
+        #manipulate data into useable format
+        #respond saying that the new model is being trained
+        #write new data to database
+        #read from database
+        #retrain model
+        #write model to file
     flask_train_data = 'flask train data'
-    return('return from train API, received {0}'.format(flask_train_data))
+    return('return from flask train API, received following training {0}'.format(content))
 
 
 @app.route('/predict', methods = ['POST'])
