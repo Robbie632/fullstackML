@@ -2,16 +2,12 @@ FROM python:3.6
 
 WORKDIR /app
 
+# Install dependencies
 COPY /app/requirements.txt /app
-Run pip install -r /app/requirements.txt
 
-#move utils into container
-WORKDIR /app/utils
-COPY /app/utils /app/utils
-WORKDIR /app
+RUN pip install -r /app/requirements.txt
 
-#move python app entry point and requirements files into container
-COPY /app/index.py /app
-
+# Copy all app files to container
+COPY /app .
 
 CMD ["python", "/app/index.py"]

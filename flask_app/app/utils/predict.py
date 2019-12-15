@@ -1,12 +1,12 @@
-#import joblib
+import joblib
 
-#model = joblib.load('model.joblib')
+model = joblib.load('model.joblib')
 
-# def predict(passenger):
-#     model.predict([
-#         [0, 20, 0, 0, 0, 0]
-#     ])
+def predictClass(passenger):
+    # TODO: Encode name, sex, etc
 
-def predictClass():
-    
-    return({'prediction': 'dead'})
+    prediction = model.predict([
+        [0, 300, 0, 0, 0, 0]
+    ])
+
+    return int(prediction[0])

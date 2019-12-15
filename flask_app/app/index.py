@@ -34,14 +34,11 @@ def train():
 
 @app.route('/predict', methods = ['POST'])
 def predict():
-    content = request.json
-    #accept request
-    #manipulate data into useable format
-    #load model
-    #predict
-    predictionOut = predictClass()
+    passenger = request.json
 
-    return(predictionOut)
+    predictionOut = predictClass(passenger)
+
+    return { 'prediction': predictionOut }
 
 if __name__ ==	'__main__':
     # Bind to PORT if defined, otherwise default to 5000.
