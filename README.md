@@ -1,5 +1,6 @@
 # fullstackML
-full stack architecture for deploying machine learning models using node and python
+
+Full stack architecture for deploying machine learning models using node and python
 
 This will allow users to either upload training data or upload data to be predicted
 Training: Data will be written to mongoDb then model will be trained and saved to file
@@ -7,7 +8,7 @@ Predicion: Data is used as input features to model, prediction is returned
 
 Model: The model will be serialised with the python library pickle and saved as a .sav file in a S3 bucket
 
-services:
+Services:
 
 * node service - provides endpoints for front end to query
 
@@ -19,3 +20,8 @@ services:
 
 Below is a schematic showing the microservices architecture and API routes:
 ![alt text](readMeImages/architecture.jpg "architecture")
+
+## Local Environment Setup
+
+- Use `docker-compose up -d --build` to start the application.
+- It is possible to configure the bound ports using a .env file. See docker-compose.yml for available environment variables.
