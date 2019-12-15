@@ -10,10 +10,12 @@ async function callFlaskApi(body, endpoint) {
 
     try {
         const flaskOutput = await instance.post(endpoint, body)
-        return(flaskOutput)
 
+        return flaskOutput
     } catch (error) {
-        return(console.log(error))
+        console.log(error)
+
+        throw error
     }
 
 }

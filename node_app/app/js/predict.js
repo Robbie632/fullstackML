@@ -42,11 +42,11 @@ inputForm.addEventListener('submit', (e)  => {
             'Content-Type':'application/json'
         }
     }).then((apiResponse) => {
-        apiResponse.json().then((jsonOut) => {
-        console.log(jsonOut)
+        apiResponse.json().then((data) => {
+            console.log(data)
 
-        //convert html element text to
-        messageOutput.textContent = jsonOut.message.age
+            //convert html element text to
+            messageOutput.textContent = `Prediction: ${data.prediction === 0 ? 'dead' : 'alive'}`
         })
     })
 })
