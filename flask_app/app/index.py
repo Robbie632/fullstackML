@@ -29,7 +29,7 @@ def train():
         #retrain model
         #write model to file
     flask_train_data = 'flask train data'
-    return('return from flask train API, received following training {0}'.format(content))
+    return('return from flask train API')
 
 
 @app.route('/predict', methods = ['POST'])
