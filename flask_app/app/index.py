@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
 import os
-from utils.train import writeToMongo
-from utils.predict import predictClass
+
+from flask import Flask, request, jsonify
+
+from utils.train import writeToMongo, readMongo, train
+from utils.predict import predictClass, predict
+from utils.data_processing import extract_cabin_number, encode_cabin, encode_title, ensure_correct_order, checkColumns
 
 app = Flask(__name__)
 
@@ -19,15 +22,12 @@ def index():
 @app.route('/train', methods=['POST'])
 def train():
     content = request.json
-    writeToMongo(content, 'train')
-    
-    #do all below in train script
-        #manipulate data into useable format
-        #respond saying that the new model is being trained
-        #write new data to database
-        #read from database
-        #retrain model
-        #write model to file
+    writeToMongo(content)
+
+    data = readMongo()
+
+    train(data, '/models')
+
     flask_train_data = 'flask train data'
     return('return from flask train API')
 
