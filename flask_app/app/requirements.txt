@@ -7,3 +7,6 @@ Flask-WTF
 flask
 joblib
 sklearn
+pandas
+numpy
+scikit-learn

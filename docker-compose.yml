@@ -16,6 +16,8 @@ services:
       - "5000:5000"
     networks:
       - fullStackML
+    volumes:
+      - "~/fullstackML_data:/app/train_data"
 
   mongo:
     container_name: mongo

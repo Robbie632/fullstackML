@@ -1,6 +1,6 @@
 #code for writing data to database, training model and outputting serialied model
 from pymongo import MongoClient
-import pandas as import pd
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import joblib

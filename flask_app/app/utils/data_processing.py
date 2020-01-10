@@ -8,7 +8,11 @@ def encode_cabin(row):
     if row["Cabin"] == None:
         return 0
     else:
-        return 'abcdefghijklmnopqrstuvwxyz'.index(str(row["Cabin"])[0].lower())
+        try:
+            return 'abcdefghijklmnopqrstuvwxyz'.index(str(row["Cabin"])[0].lower())
+        except:
+            return(0)
+
 
 
 def extract_cabin_number(row):

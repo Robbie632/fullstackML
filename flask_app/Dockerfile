@@ -10,4 +10,4 @@ RUN pip install -r /app/requirements.txt
 # Copy all app files to container
 COPY /app .
 
-CMD ["python", "/app/index.py"]
+CMD ["python", "/app/boot.py"]
