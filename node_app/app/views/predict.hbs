@@ -13,11 +13,20 @@
 <form id="predictionForm">
     Name: <input id="name" type="text"><br>
     <br>
-    Passenger Class:<input id="passenger" type="radio" name='passengerClass' value="1">1st<br>
-    <input id="passenger" type="radio" name='passengerClass' value="2">2nd<br>
-    <input id="passenger" type="radio" name='passengerClass' value="3">3rd <br>
+    Passenger Class:<input id="pclass" type="radio" name='passengerClass' value="1">1st<br>
+    <input id="pclass" type="radio" name='passengerClass' value="2">2nd<br>
+    <input id="pclass" type="radio" name='passengerClass' value="3">3rd <br>
     <br>
     Age: <input id="age" type="number" min="1" max="120"><br>
+    <br>
+    <br>
+    Ticket: <input id="ticket" type="number" min="1" max="120"><br>
+    <br>
+    <br>
+    Embarked: <input id="embarked" type="number" min="1" max="120"><br>
+    <br>
+    <br>
+    Parch: <input id="parch" type="number" min="1" max="120"><br>
     <br>
     Number of Siblings on board: <input id="siblings" type="number" min="0" max="20"><br>
     <br>
@@ -37,7 +46,6 @@
     <input id="sex" name="sex" type="radio" value="female">Female<br>
     <br>
     <input type="submit" value="Submit">
-    <br>
 </form>
 <p id="predictOutput">prediction output </p>
 

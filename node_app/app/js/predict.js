@@ -15,12 +15,16 @@ inputForm.addEventListener('submit', (e)  => {
 
     //extract data from form and assig to object
     const formData = {
-        name: inputForm.name.value,
-        age: inputForm.age.value,
-        fare: inputForm.fare.value,
-        cabin: inputForm.cabin.value,
-        sex: inputForm.sex.value,
-        embark: inputForm.embark.value
+        Name: inputForm.name.value,
+        Pclass: inputForm.pclass.value,
+        SibSp: inputForm.siblings.value,
+        Ticket:inputForm.ticket.value,
+        Age: inputForm.age.value,
+        Parch: inputForm.parch.value,
+        Fare: inputForm.fare.value,
+        Cabin: inputForm.cabin.value,
+        Sex: inputForm.sex.value,
+        Embarked: inputForm.embark.value
     };
 
     /*create query query string
@@ -43,7 +47,7 @@ inputForm.addEventListener('submit', (e)  => {
         }
     }).then((apiResponse) => {
         apiResponse.json().then((data) => {
-            console.log(data)
+            console.log(`data is ${data}`)
 
             //convert html element text to
             messageOutput.textContent = `Prediction: ${data.prediction === 0 ? 'dead' : 'alive'}`

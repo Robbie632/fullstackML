@@ -14,15 +14,19 @@ inputForm.addEventListener('submit', (e)  => {
 
 
     //extract data from form and assig to object
+    
     const formData = {
-        name: inputForm.name.value,
-        age: inputForm.age.value,
-        fare: inputForm.fare.value,
-        cabin: inputForm.cabin.value,
-        sex: inputForm.sex.value,
-        nosiblings:inputForm.siblings.value,
-        embark: inputForm.embark.value,
-        label: inputForm.label.value
+        Name: inputForm.name.value,
+        Pclass: inputForm.pclass.value,
+        SibSp: inputForm.siblings.value,
+        Ticket:inputForm.ticket.value,
+        Age: inputForm.age.value,
+        Parch: inputForm.parch.value,
+        Fare: inputForm.fare.value,
+        Cabin: inputForm.cabin.value,
+        Sex: inputForm.sex.value,
+        Embarked: inputForm.embarked.value,
+        Survived: inputForm.label.value,
     };
 
     /*create query query string

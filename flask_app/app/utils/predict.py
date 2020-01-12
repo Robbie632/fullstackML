@@ -23,6 +23,12 @@ def predict(data, encode_cabin, extract_cabin_number, encode_title, modelPath):
     
     model = joblib.load(modelPath)
 
+
+    for col in df.columns.values:
+        if col in ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare']:
+            df[col] = pd.to_numeric(df[col])
+        else:
+            continue
     
     
     data["Age"].fillna(value=data["Age"].mean(), inplace=True)
@@ -41,4 +47,4 @@ def predict(data, encode_cabin, extract_cabin_number, encode_title, modelPath):
     
     predictions = model.predict(np.array(data))
     
-    return(predictions)
+    return(predictions[0])

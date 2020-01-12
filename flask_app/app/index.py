@@ -49,7 +49,7 @@ def create_app(train_data, my_collection):
         checked_df = checkColumns(checkedData)  
         prediction = predict(checked_df, encode_cabin, extract_cabin_number, encode_title, 'models/model.joblib')
 
-        return('prediction is {0}'.format(prediction))
+        return("{{ 'prediction': {0} }}".format(prediction))
 
 
     # Bind to PORT if defined, otherwise default to 5000.

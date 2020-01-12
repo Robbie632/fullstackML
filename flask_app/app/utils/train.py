@@ -8,14 +8,14 @@ import joblib
 
 def writeToMongo(data):
 
-    data = dict(data)
+    myDict = dict(data)
 
     #create or access my datbase
     mongo_client = MongoClient('mongodb://root:example@mongo:27017')
     mydb = mongo_client['trainData']
     my_collection = mydb['train']
 
-    my_collection.insert_one(data)
+    my_collection.insert_one(myDict)
 
 def readMongo():
 
@@ -29,7 +29,14 @@ def readMongo():
     data = list(my_collection.find({}))
     df = pd.DataFrame(data)
 
-    return(data)
+
+    for col in df.columns.values:
+        if col in ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Survived']:
+            df[col] = pd.to_numeric(df[col])
+        else:
+            continue
+
+    return(df)
 
 def train(data_in, encode_cabin, extract_cabin_number, encode_title, model_path):
     
@@ -39,6 +46,7 @@ def train(data_in, encode_cabin, extract_cabin_number, encode_title, model_path)
     data: features and label of train data
     '''
     data = data_in.copy()
+
     data["Age"].fillna(value=data["Age"].mean(), inplace=True)
     data["sex_encoded"] = data.apply(lambda r: 0 if r["Sex"] == 'male' else 1, axis=1)
     data["Embarked"].fillna(value='S', inplace=True)
