@@ -24,9 +24,9 @@ def predict(data, encode_cabin, extract_cabin_number, encode_title, modelPath):
     model = joblib.load(modelPath)
 
 
-    for col in df.columns.values:
+    for col in data.columns.values:
         if col in ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare']:
-            df[col] = pd.to_numeric(df[col])
+            data[col] = pd.to_numeric(data[col])
         else:
             continue
     

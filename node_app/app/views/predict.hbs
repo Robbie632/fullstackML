@@ -20,10 +20,7 @@
     Age: <input id="age" type="number" min="1" max="120"><br>
     <br>
     <br>
-    Ticket: <input id="ticket" type="number" min="1" max="120"><br>
-    <br>
-    <br>
-    Embarked: <input id="embarked" type="number" min="1" max="120"><br>
+    Ticket: <input id="ticket" type="text"><br>
     <br>
     <br>
     Parch: <input id="parch" type="number" min="1" max="120"><br>
@@ -31,13 +28,13 @@
     Number of Siblings on board: <input id="siblings" type="number" min="0" max="20"><br>
     <br>
     Fare: <input id="fare" type="number">
-    Cabin: <input id="cabin" type="number">
+    Cabin: <input id="cabin" type="text">
     <br>
-    <select id="embark">
-        <p>location of embarkemnt</p>
-        <option value="cherbourg">Cherbourg</option>
-        <option value="southampton">Southampton</option>
-        <option value="queenstown">Queenstown</option>
+    <select id="embarked">
+        <p>location of embarkment</p>
+        <option value="C">Cherbourg</option>
+        <option value="S">Southampton</option>
+        <option value="Q">Queenstown</option>
     </select>
     <br>
     <br>
@@ -45,7 +42,9 @@
     Sex:<input id="sex" name="sex" type="radio" value="male">Male<br>
     <input id="sex" name="sex" type="radio" value="female">Female<br>
     <br>
+    <br>
     <input type="submit" value="Submit">
+    <br>
 </form>
 <p id="predictOutput">prediction output </p>
 

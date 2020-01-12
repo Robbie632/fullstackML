@@ -9,7 +9,15 @@ from utils.data_processing import extract_cabin_number, encode_cabin, encode_tit
 
 def create_app(train_data, my_collection):
 
-    my_collection.insert_many(train_data)
+    #read data, train model and save model once at start
+    my_collection.insert_many(train_data)   
+    data = readMongo()
+    df = pd.DataFrame.from_records(data)
+    checkedData = checkColumns(df)
+    train(checkedData, encode_cabin, extract_cabin_number ,encode_title, './models')
+
+
+
     app = Flask(__name__)
 
     '''heroku specifies a port to run app on as an environemental variable port

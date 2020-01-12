@@ -24,7 +24,7 @@ inputForm.addEventListener('submit', (e)  => {
         Fare: inputForm.fare.value,
         Cabin: inputForm.cabin.value,
         Sex: inputForm.sex.value,
-        Embarked: inputForm.embark.value
+        Embarked: inputForm.embarked.value
     };
 
     /*create query query string
@@ -47,7 +47,9 @@ inputForm.addEventListener('submit', (e)  => {
         }
     }).then((apiResponse) => {
         apiResponse.json().then((data) => {
-            console.log(`data is ${data}`)
+            console.log(`data is ${data}`).catch((error) => {
+                console.log(error)
+            })
 
             //convert html element text to
             messageOutput.textContent = `Prediction: ${data.prediction === 0 ? 'dead' : 'alive'}`
