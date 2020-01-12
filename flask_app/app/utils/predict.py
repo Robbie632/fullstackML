@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import numpy as np
 
 model = joblib.load('model.joblib')
 
@@ -12,7 +13,7 @@ def predictClass(passenger):
 
     return int(prediction[0])
 
-def predict(data, modelPath):
+def predict(data, encode_cabin, extract_cabin_number, encode_title, modelPath): 
     
     '''
     function for training random forest classifier model
@@ -21,6 +22,8 @@ def predict(data, modelPath):
     '''
     
     model = joblib.load(modelPath)
+
+    
     
     data["Age"].fillna(value=data["Age"].mean(), inplace=True)
     data["sex_encoded"] = data.apply(lambda r: 0 if r["Sex"] == 'male' else 1, axis=1)
@@ -31,12 +34,9 @@ def predict(data, modelPath):
     data["cabin_number"] = data.apply(extract_cabin_number, axis=1)
     
     
-    del data['Name']
-    del data['Ticket']
-    del data['Sex']
-    del data['PassengerId']
-    del data['Cabin']
-    del data['Embarked']
+    data = data[['Pclass','Age','SibSp','Parch','Fare','sex_encoded',\
+        'embarked_encoded','cabin_letter','cabin_number','title_encoded']]
+
     
     
     predictions = model.predict(np.array(data))

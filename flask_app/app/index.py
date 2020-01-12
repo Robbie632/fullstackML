@@ -32,7 +32,9 @@ def create_app(train_data, my_collection):
 
         df = pd.DataFrame.from_records(data)
 
-        train(df, encode_cabin, extract_cabin_number ,encode_title, './models')
+        checkedData = checkColumns(df)
+
+        train(checkedData, encode_cabin, extract_cabin_number ,encode_title, './models')
 
         flask_train_data = 'flask train data'
         return('return from flask train API')
@@ -40,11 +42,14 @@ def create_app(train_data, my_collection):
 
     @app.route('/predict', methods = ['POST'])
     def predict_endpoint():
+
         passenger = request.json
+        passenger_df = pd.DataFrame(passenger, index = [0])
+        checkedData = ensure_correct_order(passenger_df)
+        checked_df = checkColumns(checkedData)  
+        prediction = predict(checked_df, encode_cabin, extract_cabin_number, encode_title, 'models/model.joblib')
 
-        predictionOut = predictClass(passenger)
-
-        return { 'prediction': predictionOut }
+        return('prediction is {0}'.format(prediction))
 
 
     # Bind to PORT if defined, otherwise default to 5000.

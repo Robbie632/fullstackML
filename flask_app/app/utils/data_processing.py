@@ -54,7 +54,7 @@ def encode_title(row):
 def ensure_correct_order(data_in):
     
     data = data_in.copy()
-    cols = ['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']
+    cols = ['Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']
     data = data[cols]
     
     return(data)
